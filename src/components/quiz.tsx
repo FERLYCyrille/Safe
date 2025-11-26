@@ -39,6 +39,9 @@ const QuizPlay = () => {
         }
     };
 
+    // Calcul de la progression (0 à 100)
+    const progress = ((questionIndex + 1) / maxQuestions) * 100;
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-[#001b22] p-6">
             <div className="w-full max-w-2xl space-y-4">
@@ -47,15 +50,28 @@ const QuizPlay = () => {
                     <img src={logo} alt="Safe Logo" className="h-20 w-20 md:h-24 md:w-24 object-contain" />
                 </div>
 
+                {/* Header avec progression */}
                 <header className="text-center text-white">
-                    <p className="text-gray-300">
+                    <p className="text-gray-300 mb-2">
                         Domaine : <span className="text-blue-400">{domain}</span> | Niveau :{" "}
                         <span className="text-blue-400">{level}</span>
                     </p>
+
+                    <p className="text-gray-300 font-semibold mb-2">
+                        Question {Math.min(questionIndex + 1, maxQuestions)} / {maxQuestions}
+                    </p>
+
+                    {/* Barre de progression */}
+                    <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div
+                            className="bg-blue-500 h-3 transition-all duration-300"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
                 </header>
 
                 {questionIndex >= maxQuestions ? (
-                    <div className="bg-[#01232f] rounded-2xl shadow-lg p-8 text-center text-white">
+                    <div className="bg-[#01232f] rounded-2xl shadow-lg p-8 text-center text-white mt-6">
                         <h2 className="text-2xl font-bold mb-4">🎉 Quiz terminé !</h2>
                         <p>Vous avez répondu à {maxQuestions} questions.</p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
@@ -77,7 +93,7 @@ const QuizPlay = () => {
                         </div>
                     </div>
                 ) : question ? (
-                    <div className="bg-[#01232f] rounded-2xl shadow-lg p-8 space-y-6">
+                    <div className="bg-[#01232f] rounded-2xl shadow-lg p-8 space-y-6 mt-6">
                         <h2 className="text-2xl md:text-3xl font-extrabold text-white text-center">
                             {question.question}
                         </h2>
@@ -124,7 +140,7 @@ const QuizPlay = () => {
                         )}
                     </div>
                 ) : (
-                    <p className="text-white text-xl text-center">Chargement...</p>
+                    <p className="text-white text-xl text-center mt-6">Chargement...</p>
                 )}
             </div>
         </div>
