@@ -120,7 +120,7 @@ const QuizPlay = () => {
                         </div>
 
                         {correctionVisible && (
-                            <div className="bg-[#011a26] border border-gray-700 rounded-xl p-6 space-y-3">
+                            <div className="bg-green-400 border border-gray-700 rounded-xl p-6 space-y-3">
                                 <p className="text-lg font-semibold">
                                     {selected === question.answer ? "✔ Bonne réponse !" : "❌ Mauvaise réponse"}
                                 </p>
