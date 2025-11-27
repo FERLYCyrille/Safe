@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { getQuestion } from "../services/getQuestion";
 import logo from '../assets/logo.png';
+import { useNavigate } from "react-router-dom";
+
 
 const QuizPlay = () => {
+    const navigate = useNavigate();
+
     const { domain } = useParams();
     const [searchParams] = useSearchParams();
     const level = searchParams.get("level") || "facile";
@@ -21,11 +25,26 @@ const QuizPlay = () => {
 
     const loadQuestion = async () => {
         if (questionIndex >= maxQuestions) return;
-        const q = await getQuestion(domain!, level);
-        setQuestion(q);
-        setSelected(null);
-        setCorrectionVisible(false);
+
+        try {
+            const q = await getQuestion(domain!, level);
+
+            // Si l'API a renvoyé une erreur
+            if (!q || q.error) {
+                navigate("/default");
+                return;
+            }
+
+            setQuestion(q);
+            setSelected(null);
+            setCorrectionVisible(false);
+
+        } catch (err) {
+            // Erreur réseau, JSON cassé, backend off, etc.
+            navigate("/default");
+        }
     };
+
 
     const checkAnswer = (option: string) => {
         setSelected(option);
