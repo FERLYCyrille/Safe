@@ -6,14 +6,16 @@ export async function getQuestion(domain: string, level: string) {
             body: JSON.stringify({ domain, level }),
         });
 
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP ${response.status}`);
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+            throw new Error(data?.error || "Quiz invalide");
         }
 
-        const data = await response.json();
         return data;
+
     } catch (err) {
-        console.error("Erreur lors de la récupération de la question :", err);
-        return { error: "Impossible de récupérer la question" };
+        console.error(err);
+        return [];
     }
 }
