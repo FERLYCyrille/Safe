@@ -1,38 +1,40 @@
 import React from "react";
 import DomainCard from "./DomainCard";
-import { Lock, CreditCard, ShoppingBag, Globe } from "lucide-react";
+import { Smartphone, CreditCard, Users, Wifi } from "lucide-react";
 
 const DomainGrid: React.FC = () => {
     const domains = [
         {
-            title: "Vie privée & réseaux sociaux",
-            description: "Protège tes infos, paramètres et profils en ligne.",
-            icon: <Lock size={18} />,
-            path: "/quiz/vie-privee",
+            title: "Usages du smartphone",
+            description: "Sécurité des applications, réglages et données personnelles.",
+            icon: <Smartphone size={18} />,
+            path: "/quiz/smartphone",
         },
         {
-            title: "Paiement mobile & arnaques",
-            description: "Déjoue les escroqueries et sécurise tes transactions.",
+            title: "Paiements et transactions",
+            description: "Moyens de paiement numériques et prévention des fraudes.",
             icon: <CreditCard size={18} />,
-            path: "/quiz/paiement",
+            path: "/quiz/paiements",
         },
         {
-            title: "Commerce & entreprises",
-            description: "Protège tes ventes, tes données et tes clients.",
-            icon: <ShoppingBag size={18} />,
-            path: "/quiz/commerce",
+            title: "Réseaux sociaux et échanges",
+            description: "Gestion des profils, messages et informations partagées.",
+            icon: <Users size={18} />,
+            path: "/quiz/reseaux-sociaux",
         },
         {
-            title: "Culture numérique & souveraineté",
-            description: "Comprends les enjeux, du local à l’Afrique numérique.",
-            icon: <Globe size={18} />,
-            path: "/quiz/souverainete",
+            title: "Navigation sur Internet",
+            description: "Connexion, consultation de sites et téléchargements.",
+            icon: <Wifi size={18} />,
+            path: "/quiz/navigation",
         },
     ];
 
     return (
         <section className="mt-8">
-            <h3 className="text-white font-semibold mb-4">Choisis ton domaine</h3>
+            <h3 className="text-white font-semibold mb-4">
+                Sélectionnez un domaine
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {domains.map((domain, index) => (
                     <DomainCard key={index} {...domain} />
